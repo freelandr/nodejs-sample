@@ -10,7 +10,7 @@ jobs:
       run: |
         if BUILD_RESULT=`curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
                         https://api.github.com/repos/${{ github.repository }}/commits/b2/check-runs \
-                        | jq '.check_runs[] | select(.name=="validate") | .conclusion'`
+                        | jq -r '.check_runs[] | select(.name=="validate") | .conclusion'`
         then
           echo $BUILD_RESULT
           echo "validate-result=$BUILD_RESULT" >> $GITHUB_OUTPUT
