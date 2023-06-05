@@ -17,5 +17,5 @@ jobs:
         echo "validate-result=$BUILD_RESULT" >> $GITHUB_OUTPUT
         echo $GITHUB_OUTPUT
     - name: deploy changes
-      if: steps.check-build.outputs.validate-result == 'success'
+      if: ${{ steps.check-build.outputs.validate-result == 'success' }}
       run: echo deploying changes
