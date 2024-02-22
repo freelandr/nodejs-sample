@@ -1,6 +1,13 @@
 on:
   workflow_dispatch:
 
+env:
+  AWS_REGION: "us-east-1"
+
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout    
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,7 +30,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::675115824335:role/github-actions-deploy
           role-session-name: rolesession
-          aws-region: us-east-1
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Amazon CodeGuru Reviewer Scanner
         uses: aws-actions/codeguru-reviewer@v1.1
